@@ -1,4 +1,7 @@
 #pragma once
+#include <iostream>
+#include <string>
+using namespace std;
 
 
 class Ticket {
@@ -6,7 +9,7 @@ class Ticket {
 	/// Attributes & Defaults
 
 private:
-	string id = "";
+	string ticketID = "*";
 	int row = -1;
 	int seat = -1;
 	bool isVIPSeat = false;
@@ -15,6 +18,7 @@ private:
 public:
 
 	/// Magic numbers
+
 	static const int ID_LENGTH = 6;
 	static const int MIN_ROW_NO = 1;
 	static const int MAX_ROW_NO = 7;
@@ -25,7 +29,7 @@ public:
 	/// Getters
 	
 		string getID() {
-			return this->id;
+			return this->ticketID;
 
 		}
 
@@ -55,7 +59,7 @@ public:
 			throw exception("ID size is invalid");
 		}
 
-		this->id = ID;
+		this->ticketID = ID;
 	}
 
 	void setRow(int newRow) {
@@ -74,38 +78,40 @@ public:
 		this->seat = newSeat;
 	}
 
-
-	/// WILL FIX LATER I PROMISE 
-
-
 	void getsVIPSeat() {
 		this->isVIPSeat = true;
 	}
-	void getsNoVIPSeat() {
+	void getsNonVIPSeat() {
 		this->isVIPSeat = false;
 	}
-
 	void getsSpecialNeedsSeat() {
 		this->isSpecialNeedsSeat = true;
 	}
-
-	void getsNoSpecialNeedsSeat() {
+	void getsNonSpecialNeedsSeat() {
 		this->isSpecialNeedsSeat = false;
 	}
 
+	void getSeatType() {
+		if (row >= 3 && row <= 5 && seat >= 3 && seat <= 13) {
+			getsVIPSeat();
+		}
+		else getsNonVIPSeat;
 
-	///WILL FIX THIS TOO 
+		if (row >= 3 && row <= 5 && seat <= 3 && seat >= 13) {
+			getsSpecialNeedsSeat();
+		}
+		else getsNonSpecialNeedsSeat();
+
+	}
+
 
 
 	/// Constructor
-	Ticket(string code, int row, int seat, bool isVIPSeat, bool isSpecialNeedsSeat) {
-		this->id = code;
-		this->row = row;
-		this->seat = seat;
-		this->isVIPSeat = isVIPSeat;
-		this->isSpecialNeedsSeat = isSpecialNeedsSeat;
-		
-
+	Ticket(string code, int row, int seat) {
+		setID(code);
+		setRow(row);
+		setSeat(seat);
+		getSeatType();
 	}
 
 

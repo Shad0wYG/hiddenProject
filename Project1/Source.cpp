@@ -7,27 +7,27 @@ using namespace std;
 int SeatMatrix[8][16];
 
 void createSeatMatrix(int seatmatrix[8][16]) {
-	for (int i = 0; i < 2; i++) 
-		for (int j = 0; j < 15; j++) seatmatrix[i][j] = 1;
+	for (int i = 1; i <= 2; i++) 
+		for (int j = 1; j <= 15; j++) seatmatrix[i][j] = 1; /// Normal Seats
 
-	for (int i = 2; i < 5; i++) {
+	for (int i = 3; i <= 5; i++) {
 
-		for (int j = 0; j < 2; j++) seatmatrix[i][j] = 2;
-		for (int j = 2; j < 13; j++) seatmatrix[i][j] = 0;
-		for (int j = 13; j < 15; j++) seatmatrix[i][j] = 2;
+		for (int j = 1; j <= 2; j++) seatmatrix[i][j] = 2;		/// Special Needs Seats
+		for (int j = 3; j <= 13; j++) seatmatrix[i][j] = 0;    /// VIP SEATS
+		for (int j = 14; j <= 15; j++) seatmatrix[i][j] = 2;		/// Special Needs Seats
 
 
 	}
-	for (int i = 5; i < 7; i++) {
-			for (int j = 0; j < 15; j++) seatmatrix[i][j] = 1;
+	for (int i = 6; i <= 7; i++) {
+			for (int j = 1; j <= 15; j++) seatmatrix[i][j] = 1; /// Normal Seats
 			
 		}
 }
 
 
 void printSeatMatrix(int seatmatrix[8][16]) {
-	for (int i = 0; i < 7; i++) {
-		for (int j = 0; j < 15; j++) cout << seatmatrix[i][j] << " ";
+	for (int i = 1; i <= 7; i++) {
+		for (int j = 1; j <= 15; j++) cout << seatmatrix[i][j] << " ";
 		cout << "\n";
 	}
 
