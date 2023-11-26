@@ -3,6 +3,118 @@
 #include <string>
 using namespace std;
 
+
+enum Room {ROOM01 =1, ROOM02, ROOM03, ROOM04}; ///could give unique names to the rooms in the future
+
+class Movie {
+private:
+
+	/// Attributes
+	string movieName = "-";
+	Room room;
+	string date = "01/01/1970"; /// dd/mm/yyyy
+
+
+
+public:
+	
+	/// Getters
+
+	string getMovieName() {
+		return this->movieName;
+	}
+
+	Room getRoom() {
+		return this->room;
+	}
+
+	string getDate() {
+		return this->date;
+	}
+
+
+	/// Setters
+
+	void setMovieName(const string movie) {
+		if (movie.empty()) {
+			throw exception("\nNo movie name inserted. ");
+		}
+		else {
+			this->movieName = movie;
+
+		}
+	}
+
+	void setRoom(enum Room bruh) {
+		/*switch (room) {
+		case(ROOM01):
+			this->room = ROOM01;
+		case(ROOM02):
+			this->room = ROOM02;
+		case(ROOM03):
+			this->room = ROOM03;
+		case(ROOM04): 
+			this->room = ROOM04;}*/
+
+		this->room = bruh;
+
+	}
+
+	void setDate(string newDate) {
+
+		if (newDate[2] != '/' || newDate[5] != '/') {
+			throw exception("Invalid Date Format");
+		}
+
+		this->date = newDate;
+
+	}
+
+
+
+
+	void printRoom(enum Room room) {
+
+		switch (room) {
+
+		case(ROOM01): {
+			cout << "Room 01";
+			return; 
+		}
+
+		case(ROOM02): {
+			cout << "Room 02";
+			return;
+		}
+
+		case(ROOM03): {
+			cout << "Room 03";
+			return; 
+		}
+
+		case(ROOM04): {
+			cout << "Room 04";
+			return;
+		}
+		
+		
+		}
+
+
+	}
+
+
+
+	Movie(string movie, Room roomNo, string date) {
+		setMovieName(movie);
+		setRoom(roomNo);
+		setDate(date);
+	}
+
+
+};
+
+
 class Seat {
 
 	/// Attributes
@@ -152,9 +264,11 @@ class Ticket {
 
 	/// Attributes & Defaults
 
+
 private:
 	string ticketID = "*";
 	Seat seat;
+	Movie movie;
 
 public:
 
@@ -222,9 +336,10 @@ public:
 
 
 	/// Constructor
-	Ticket(string code, int row, int seat) : seat(row, seat) {
+	Ticket(string code, int row, int seat, string movieName, string Date, Room roomNo ) : seat(row, seat), movie(movieName, roomNo, Date) {
 		setID(code);
 	}
+
 
 
 
