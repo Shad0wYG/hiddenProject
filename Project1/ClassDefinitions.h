@@ -21,7 +21,7 @@ class Seat {
 	static int TICKETS_SOLD;
 
 
-
+public:
 	/// Getters
 
 	int getRow() {
@@ -171,6 +171,33 @@ public:
 
 		}
 
+	int getSeatRow() {
+		return this->seat.getRow();
+	}
+	int getSeatNo() {
+		return this->seat.getSeat();
+	}
+	bool getVIPSeatStatus() {
+		return this->seat.getVIPSeat();
+
+	}
+	bool getSpecialNeedsSeatStatus() {
+		return this->seat.getSpecialNeedsSeat();
+	}
+
+	void printSeatType() {
+
+		if (this->getVIPSeatStatus()) {
+			cout << "VIP Seat";
+		}
+		else if (this->getSpecialNeedsSeatStatus()) {
+			cout << "Special Needs Seat";
+		}
+		else cout << "Standard Seat";
+
+	}
+
+
 
 
 	/// Setters
@@ -182,6 +209,14 @@ public:
 		}
 
 		this->ticketID = ID;
+	}
+
+	void setSeatRow(int x) {
+		seat.setRow(x);
+	}
+
+	void setSeatNo(int x) {
+		seat.setSeat(x);
 	}
 
 
@@ -205,10 +240,12 @@ void operator<<(ostream& console, Ticket& ticket) {
 	console << "*********************************";
 
 
+	
+
 
 	console << "\n Ticket ID: " << ticket.getID();
-	console << "\n Row No: " << ticket.getRow();
-	console << "\n Seat No: " << ticket.getSeat();
+	console << "\n Row No: " << ticket.getSeatRow();
+	console << "\n Seat No: " << ticket.getSeatNo();
 	console << "\n Seat Type: "; ticket.printSeatType();
 
 }
@@ -217,12 +254,12 @@ void operator>>(istream& console, Ticket& ticket) {
 	cout << "Insert the desired row number: ";
 	int newRow;
 	console >> newRow;
-	ticket.setRow(newRow);
+	ticket.setSeatRow(newRow);
 
 	cout << "Insert the desired seat number: ";
 	int newSeat;
 	console>> newSeat;
-	ticket.setSeat(newSeat);
+	ticket.setSeatNo(newSeat);
 
 }
 
