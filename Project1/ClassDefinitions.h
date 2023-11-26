@@ -71,7 +71,7 @@ public:
 	}
 
 
-
+	
 
 	void printRoom(enum Room room) {
 
