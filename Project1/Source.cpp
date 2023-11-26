@@ -37,7 +37,6 @@ int main() {
 	//createSeatMatrix(SeatMatrix);
 	//printSeatMatrix(SeatMatrix);
 
-	Ticket testTicket("SGA791", 4, 8);
-	cout << testTicket;
+
 
 }

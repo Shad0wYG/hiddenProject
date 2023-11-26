@@ -3,23 +3,16 @@
 #include <string>
 using namespace std;
 
+class Seat {
 
-class Ticket {
-
-	/// Attributes & Defaults
-
-private:
-	string ticketID = "*";
+	/// Attributes
 	int row = -1;
 	int seat = -1;
 	bool isVIPSeat = false;
 	bool isSpecialNeedsSeat = false;
 
-public:
 
-	/// Magic numbers
-
-	static const int ID_LENGTH = 6;
+	///Magic numbers
 	static const int MIN_ROW_NO = 1;
 	static const int MAX_ROW_NO = 7;
 	static const int MIN_SEAT_NO = 1;
@@ -28,28 +21,26 @@ public:
 	static int TICKETS_SOLD;
 
 
+
 	/// Getters
-	
-		string getID() {
-			return this->ticketID;
 
-		}
+	int getRow() {
+		return this->row;
+	}
 
-		int getRow() {
-			return this->row;
-		}
+	int getSeat() {
+		return this->seat;
+	}
 
-		int getSeat() {
-			return this->seat;
-		}
+	bool getVIPSeat() {
+		return this->isVIPSeat;
+	}
 
-		bool getVIPSeat() {
-			return this->isVIPSeat;
-		}
+	bool getSpecialNeedsSeat() {
+		return this->isSpecialNeedsSeat;
+	}
 
-		bool getSpecialNeedsSeat() {
-			return this->isSpecialNeedsSeat;
-		}
+
 
 
 	void printSeatType() {
@@ -57,20 +48,14 @@ public:
 		else if (isSpecialNeedsSeat) cout << "Special Needs Seat";
 		else cout << "Standard Seat";
 
-		}
+	}
 
-	
+	int checkTicketsLeft() {
+		return MAX_NO_TICKETS - TICKETS_SOLD;
+	}
+
 
 	/// Setters
-
-	void setID(string ID) {
-
-		if (ID.size() != ID_LENGTH) {
-			throw exception("ID size is invalid");
-		}
-
-		this->ticketID = ID;
-	}
 
 	void setRow(int newRow) {
 		if (newRow < MIN_ROW_NO || newRow > MAX_ROW_NO) {
@@ -88,7 +73,7 @@ public:
 		this->seat = newSeat;
 	}
 
-private: 
+private:
 	void hasVIPSeat() {
 		this->isVIPSeat = true;
 	}
@@ -117,16 +102,7 @@ public:
 	}
 
 
-
-	int checkTicketsLeft() {
-		return MAX_NO_TICKETS - TICKETS_SOLD;
-	}
-
-
-
-	/// Constructor
-	Ticket(string code, int row, int seat) {
-		setID(code);
+	void setSeat(int row, int seat) {
 		setRow(row);
 		setSeat(seat);
 		setSeatType();
@@ -134,21 +110,121 @@ public:
 	}
 
 
+		/// Constructor
+	Seat(int row, int seat) {
+		setRow(row);
+		setSeat(seat);
+		setSeatType();
+		TICKETS_SOLD++;
+	}
+
+
+		 /// Copy constructor
+	Seat( Seat& seat) {
+		this->row = seat.row;
+		this->seat = seat.seat;
+		this->isVIPSeat = seat.isVIPSeat;
+		this->isSpecialNeedsSeat = seat.isSpecialNeedsSeat;
+
+
+	}
+
+	/// Destructor
+	~Seat() {
+
+	}
+
+	void operator=(const Seat& source) {
+		if (&source == this) return;
+		else {
+			this->setRow(source.row);
+			this->setSeat(source.seat);
+			this->isVIPSeat = source.isVIPSeat;
+			this->isSpecialNeedsSeat = source.isSpecialNeedsSeat;
+		}
+	}
+
+
+
+};
+
+class Ticket {
+
+	/// Attributes & Defaults
+
+private:
+	string ticketID = "*";
+	Seat seat;
+
+public:
+
+	/// Magic numbers
+
+	static const int ID_LENGTH = 6;
+
+
+
+	/// Getters
+	
+	string getID() {
+			return this->ticketID;
+
+		}
+
+
+
+	/// Setters
+
+	void setID(string ID) {
+
+		if (ID.size() != ID_LENGTH) {
+			throw exception("ID size is invalid");
+		}
+
+		this->ticketID = ID;
+	}
+
+
+
+	/// Constructor
+	Ticket(string code, int row, int seat) : seat(row, seat) {
+		setID(code);
+	}
+
+
 
 	/// Destructor
 	~Ticket() {
-		TICKETS_SOLD--;
 	}
 
 };
 
-int Ticket::TICKETS_SOLD = 0;
+int Seat::TICKETS_SOLD = 0;
 
-void operator<<(ostream& console, Ticket ticket) {
+void operator<<(ostream& console, Ticket& ticket) {
 	console << "*********************************";
+
+
+
 	console << "\n Ticket ID: " << ticket.getID();
 	console << "\n Row No: " << ticket.getRow();
 	console << "\n Seat No: " << ticket.getSeat();
 	console << "\n Seat Type: "; ticket.printSeatType();
 
 }
+
+void operator>>(istream& console, Ticket& ticket) {
+	cout << "Insert the desired row number: ";
+	int newRow;
+	console >> newRow;
+	ticket.setRow(newRow);
+
+	cout << "Insert the desired seat number: ";
+	int newSeat;
+	console>> newSeat;
+	ticket.setSeat(newSeat);
+
+}
+
+
+
