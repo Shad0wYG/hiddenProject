@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-//#include "ClassDefinitions.h";
+#include "ClassDefinitions.h";
 
 using namespace std;
 
@@ -13,7 +13,7 @@ void createSeatMatrix(int seatmatrix[8][16]) {
 	for (int i = 3; i <= 5; i++) {
 
 		for (int j = 1; j <= 2; j++) seatmatrix[i][j] = 2;		/// Special Needs Seats
-		for (int j = 3; j <= 13; j++) seatmatrix[i][j] = 0;    /// VIP SEATS
+		for (int j = 3; j <= 13; j++) seatmatrix[i][j] = 0;    /// VIP Seats
 		for (int j = 14; j <= 15; j++) seatmatrix[i][j] = 2;		/// Special Needs Seats
 
 
@@ -34,7 +34,10 @@ void printSeatMatrix(int seatmatrix[8][16]) {
 }
 
 int main() {
-	createSeatMatrix(SeatMatrix);
-	printSeatMatrix(SeatMatrix);
+	//createSeatMatrix(SeatMatrix);
+	//printSeatMatrix(SeatMatrix);
+
+	Ticket testTicket("SGA791", 4, 8);
+	cout << testTicket;
 
 }

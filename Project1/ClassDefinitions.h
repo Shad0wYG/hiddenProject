@@ -24,6 +24,8 @@ public:
 	static const int MAX_ROW_NO = 7;
 	static const int MIN_SEAT_NO = 1;
 	static const int MAX_SEAT_NO = 15;
+	static const int MAX_NO_TICKETS = 105;
+	static int TICKETS_SOLD;
 
 
 	/// Getters
@@ -47,6 +49,14 @@ public:
 
 		bool getSpecialNeedsSeat() {
 			return this->isSpecialNeedsSeat;
+		}
+
+
+	void printSeatType() {
+		if (isVIPSeat) cout << "VIP Seat";
+		else if (isSpecialNeedsSeat) cout << "Special Needs Seat";
+		else cout << "Standard Seat";
+
 		}
 
 	
@@ -78,30 +88,38 @@ public:
 		this->seat = newSeat;
 	}
 
-	void getsVIPSeat() {
+private: 
+	void hasVIPSeat() {
 		this->isVIPSeat = true;
 	}
-	void getsNonVIPSeat() {
+	void hasNonVIPSeat() {
 		this->isVIPSeat = false;
 	}
-	void getsSpecialNeedsSeat() {
+	void hasSpecialNeedsSeat() {
 		this->isSpecialNeedsSeat = true;
 	}
-	void getsNonSpecialNeedsSeat() {
+	void hasNonSpecialNeedsSeat() {
 		this->isSpecialNeedsSeat = false;
 	}
 
-	void getSeatType() {
+public:
+	void setSeatType() {
 		if (row >= 3 && row <= 5 && seat >= 3 && seat <= 13) {
-			getsVIPSeat();
+			hasVIPSeat();
 		}
-		else getsNonVIPSeat;
+		else hasNonVIPSeat();
 
 		if (row >= 3 && row <= 5 && seat <= 3 && seat >= 13) {
-			getsSpecialNeedsSeat();
+			hasSpecialNeedsSeat();
 		}
-		else getsNonSpecialNeedsSeat();
+		else hasNonSpecialNeedsSeat();
 
+	}
+
+
+
+	int checkTicketsLeft() {
+		return MAX_NO_TICKETS - TICKETS_SOLD;
 	}
 
 
@@ -111,21 +129,26 @@ public:
 		setID(code);
 		setRow(row);
 		setSeat(seat);
-		getSeatType();
+		setSeatType();
+		TICKETS_SOLD++;
 	}
 
 
-};
 
-
-class Movie {
-
-
-};
-
-class Location {
-
+	/// Destructor
+	~Ticket() {
+		TICKETS_SOLD--;
+	}
 
 };
 
+int Ticket::TICKETS_SOLD = 0;
 
+void operator<<(ostream& console, Ticket ticket) {
+	console << "*********************************";
+	console << "\n Ticket ID: " << ticket.getID();
+	console << "\n Row No: " << ticket.getRow();
+	console << "\n Seat No: " << ticket.getSeat();
+	console << "\n Seat Type: "; ticket.printSeatType();
+
+}
