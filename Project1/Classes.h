@@ -2,14 +2,14 @@
 #include <iostream>
 #include <fstream>
 #include "Classes.h"
+#include "Utils.h";
+#include <string>
 
 using namespace std;
 
-enum ZONE  { LEFT = 1, RIGHT = 2, TOP = 3 };
-
 
 class Location {
-private:
+protected:
 	int room = -1; //could be room1,room2
 	ZONE zone = LEFT;
 	int seatNo = -1; // 1-10/row if left/right, 1-20/row if top
@@ -103,12 +103,38 @@ public:
 };
 
 class Event {
+protected:
 	string name = "";
+	VENUE venue;
+
+public:
+
+	void printEvents() {
+		if (this->venue == THEATER) {
+			cout << "\n1: Hamlet - Willian Shakespeare";
+			cout << "\n2: Long Day's Journey Into Night - Eugene O'Neill";
+			cout << "\n3: Who's Afraid of Virginia Woolf? - Edward Albee";
+			cout << "\n4: Death of a Salesman - Arthur Miller";
+			cout << "\n5: Oedipus Rex by Sophocles";
+
+		}
+		else if (this->venue == MOVIES) {
+			cout << "\n1: Top Gun: Maverick";
+			cout << "\n2: Black Panther: Wakanda Forever";
+			cout << "\n3: Avatar: The Way of Water";
+			cout << "\n4: Scream";
+		}
+
+	}
 
 };
 
 class Ticket {
+protected:
 	Event event;
 	Location location;
+
+public:
+
 
 };
