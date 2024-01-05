@@ -1,4 +1,7 @@
 #pragma once
+#include <iostream>
+#include <cstdlib>
+
 
 
 enum VENUE { THEATER = 1, MOVIES = 2};
@@ -19,3 +22,19 @@ enum EVENTMovies { TOP_GUN =1, BL_PANTH = 2, AVATAR =3, SCREAM =4 };
 //Avatar: The Way of Water
 //Scream
 
+class Randomizer {
+protected:
+	char allCharacters[40] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890" };
+	const int MAXRAND = 36;
+
+public:
+	char* getRandID(){
+		char v[6];
+		for (int i = 0; i < 6; i++) {
+			v[i] = allCharacters[rand() % MAXRAND];
+		}
+
+		return v;
+	}
+
+};

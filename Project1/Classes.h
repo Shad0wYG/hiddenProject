@@ -87,7 +87,7 @@ public:
 
 	///Ctors
 	Location(int Room, ZONE Zone, int SeatNo) {
-		cout << "\n Ctor1";
+		//cout << "\n CtorLoc";
 
 		this->setRoom(Room);
 		this->setZone(Zone);
@@ -98,7 +98,7 @@ public:
 
 	///Dtor
 	~Location() {
-		cout << "\n Dtor";
+		//cout << "\n DtorLoc";
 	}
 };
 
@@ -127,14 +127,22 @@ public:
 
 	}
 
+
+
 };
 
 class Ticket {
 protected:
+	char* id;
 	Event event;
 	Location location;
 
 public:
+
+	void setTicketID() {
+		Randomizer rand;
+		this->id = rand.getRandID();
+	}
 
 
 };
