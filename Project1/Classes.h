@@ -100,10 +100,14 @@ public:
 	~Location() {
 		//cout << "\n DtorLoc";
 	}
+
+	friend void operator<<(ostream& console, Location& loc);
+	friend void operator>>(ifstream& console, Location& loc);
 };
 
 class Event {
 protected:
+	int eventNo = -1;
 	string name = "";
 	VENUE venue;
 
@@ -127,8 +131,97 @@ public:
 
 	}
 
+	///Getters
+
+	int getEventNo() {
+		return this->eventNo;
+	}
+
+	string getName() {
+		return this->name;
+	}
+
+	VENUE getVenue() {
+		return this->venue;
+	}
 
 
+	//Setters
+
+
+	void seteventNo(int no) {
+		if (this->venue == THEATER) {
+			if (no < 1 || no > 5) throw exception("Invalid event");
+			else this->eventNo = no;
+		}
+
+		else if (this->venue == MOVIES) {
+			if (no < 1 || no > 4) throw exception("Invalid event");
+			else this->eventNo = no;
+		}
+	}
+
+	void setName() { // tf do i put in ()
+		if (this->venue == THEATER) {
+			switch (this->eventNo) {
+			case(1): {
+				this->name = "HAMLET";
+				break;
+			}
+			case(2): {
+				this->name = "LONG_DAY";
+				break;
+			}
+			case(3): {
+				this->name = "AFRAID";
+				break;
+			}
+			case(4): {
+				this->name = "DEATH_SALESMAN";
+				break;
+			}
+
+			case(5): {
+				this->name = "OEDIPUS";
+				break;
+			}
+
+
+			}
+		}
+		else if (this->venue == MOVIES) {
+			switch (this->eventNo) {
+			case(1): {
+				this->name = "TOP_GUN";
+				break;
+			}
+			case(2): {
+				this->name = "BL_PANTH";	
+				break;
+			}
+			case(3): {
+				this->name = "AVATAR";
+				break;
+			}
+			case(4): {
+				this->name = "SCREAM";
+				break;
+			}
+			}
+
+		}
+
+
+	}
+
+	void setVenue(VENUE ven) {
+		this->venue = ven;
+	}
+
+
+
+	friend void operator<<(ostream& console, Event& event);
+	friend void operator>>(ifstream& console, Event& event);
 };
 
 class Ticket {
@@ -139,10 +232,94 @@ protected:
 
 public:
 
+	char* getTicketID() {
+		return this->id;
+	}
+
+
 	void setTicketID() {
 		Randomizer rand;
 		this->id = rand.getRandID();
 	}
 
 
+
+	friend void operator<<(ostream& console, Ticket& ticket);
+	friend void operator>>(istream& console, Ticket& ticket);
 };
+
+///Location Operators
+
+void operator<<(ostream& console, Location& loc) {
+
+	//console << "\nLOCATION OUT";
+
+	console << loc.getRoom() << "\n";
+	console << loc.getSeatNo() << "\n";
+	console << loc.getSeatType() << "\n";
+	console << loc.getZone() << "\n";
+
+
+}
+
+
+void operator>>(ifstream& console, Location& loc) {
+	int _room;
+	console >> _room;
+	loc.setRoom(_room);
+	
+	int nr;
+	console >> nr;
+	loc.setZone(toZone(nr));
+
+
+	int _seat;
+	console >> _seat;
+	loc.setSeatNoAndType(_seat);
+
+}
+
+
+///Event Operators
+
+void operator<<(ostream& console, Event& event) {
+
+	//console << "\nEVENT OUT";
+
+	console << event.getEventNo() << "\n";
+	console << event.getName() << "\n";
+	console << event.getVenue() << "\n";
+}
+
+
+void operator>>(ifstream& console, Event& event) {
+
+	int no;
+	console >> no;
+	event.setVenue(toVenue(no));
+	
+	int no2;
+	console >> no2;
+	event.seteventNo(no2);
+
+	event.setName();
+
+}
+
+
+///Ticket Operators
+
+void operator<<(ostream& console, Ticket& ticket) {
+	
+	//console << "\nTICKET OUT";
+
+	console << ticket.getTicketID() << "\n";
+	console << ticket.event;
+
+}
+
+void operator>>(istream& console, Ticket& ticket) {
+	
+}
+
+

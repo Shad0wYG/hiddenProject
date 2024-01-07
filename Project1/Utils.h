@@ -1,8 +1,7 @@
 #pragma once
 #include <iostream>
 #include <cstdlib>
-
-
+#include <string>
 
 enum VENUE { THEATER = 1, MOVIES = 2};
 
@@ -22,6 +21,37 @@ enum EVENTMovies { TOP_GUN =1, BL_PANTH = 2, AVATAR =3, SCREAM =4 };
 //Avatar: The Way of Water
 //Scream
 
+
+const char* toString(ZONE p) {
+	switch (p)
+	{
+	case ZONE::LEFT:
+		return "Left";
+	case ZONE::RIGHT:
+		return "Right";
+	case ZONE::TOP:
+		return "Top";
+	}
+
+}
+
+ZONE toZone(int nr) {
+	switch (nr) {
+	case(1): return LEFT;
+	case(2): return RIGHT;
+	case(3): return TOP; 
+	}
+}
+
+VENUE toVenue(int nr) {
+	switch (nr) {
+	case(1): return THEATER;
+	case(2): return MOVIES;
+
+	}
+}
+
+
 class Randomizer {
 protected:
 	char allCharacters[40] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890" };
@@ -38,3 +68,5 @@ public:
 	}
 
 };
+
+
