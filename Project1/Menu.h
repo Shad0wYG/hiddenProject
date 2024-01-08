@@ -3,8 +3,22 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "Utils.h"
+
 
 using namespace std;
+
+void readFromFile(ifstream& file) {
+	if (!file.is_open()) {
+		throw exception("File does not exist.");
+	}
+	while (!file.eof()) {
+		char buffer[255];
+		file.getline(buffer, 255);
+		cout << buffer << '\n';
+	}
+}
+
 
 void displayMenu() {
 

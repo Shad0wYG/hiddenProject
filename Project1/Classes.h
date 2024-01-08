@@ -8,6 +8,7 @@
 using namespace std;
 
 
+
 class Location {
 protected:
 	int room = -1; //could be room1,room2
@@ -315,11 +316,19 @@ void operator<<(ostream& console, Ticket& ticket) {
 
 	console << ticket.getTicketID() << "\n";
 	console << ticket.event;
+	console << ticket.location;
 
 }
 
+/// idk ig mai uita te alta data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 void operator>>(istream& console, Ticket& ticket) {
-	
+	ticket.setTicketID();
+	Event ev;
+
+
+
+
 }
 
 

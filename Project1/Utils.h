@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <string>
+#include <fstream>
 
 enum VENUE { THEATER = 1, MOVIES = 2};
 
