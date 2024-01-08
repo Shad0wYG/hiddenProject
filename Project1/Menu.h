@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include "Utils.h"
+#include "Classes.h";
 
 
 using namespace std;
@@ -19,56 +20,52 @@ void readFromFile(ifstream& file) {
 	}
 }
 
+void updateLog() {
+
+}
+
+void readLog() {
+
+}
+
 
 void displayMenu() {
 
-	bool close = false;
+	fstream log("log.txt");
+	ifstream start("MenuStart.txt");
+	ifstream view("MenuView.txt");
+	ifstream request("MenuRequest.txt");
+	bool leave=false;
 
-	while (true) {
+	readFromFile(start);
+	char ans;
+	cin >> ans;
+	switch (ans) {
+	case('1'): {
+		readFromFile(view);
+		readLog();
+		break; 
+	}
+	case('2'): {
+		readFromFile(request);
 
-		close = false;
-		if (close) break;
-		else {
-			cout << "\n\n------------ Ticketing App ------------\n\n";
-			cout << "Options: \n1) View Tickets \n2) Request a Ticket\n";
 
 
-			cout << "\nChoose a number (Press 0 to exit):\n\n";
-			char choice;
-			cin >> choice;
-			if (choice == '0') break;
-			else {
+		updateLog();
+		break;
+	}
+	case('0'): {
+		leave = true;
+		break;
+	}
+	default: displayMenu();
 
-				switch (choice) {
-				case '1': {
-					cout << "\n#Viewing Tickets";
-					//viewTickets();
+	if (leave) break;
 
-					cout << "\n\nReturn? Press 0\n\n";
-					char ret;
-					cin >> ret;
-					if (ret == '0');
-					else close = true;
-					break;
-				}
-				case '2': {
-					cout << "\n#Requesting a Ticket\n";
-					//reqTicket();
-
-					cout << "\n\nReturn? Press 0\n\n";
-					int ret;
-					cin >> ret;
-					if (ret == '0');
-					else close = true;
-					break;
-				}
-				}
-
-			}
-		}
 	}
 
 
 
 
+	if (!leave) displayMenu();
 }

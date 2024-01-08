@@ -3,7 +3,7 @@
 ------------ Ticketing App ------------
 
 Options: 
-1) View Tickets 
+1) View Tickets (Requires App restart)
 2) Request a Ticket
 
 Choose a number (Press 0 to exit):
