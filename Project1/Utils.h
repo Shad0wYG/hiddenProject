@@ -33,8 +33,19 @@ const char* toString(ZONE p) {
 		return "Right";
 	case ZONE::TOP:
 		return "Top";
+	case ZONE::MIDDLE:
+		return "Middle";
 	}
 
+}
+
+const char* toString(VENUE v) {
+	switch (v) {
+	case VENUE::MOVIES: 
+		return "Movies";
+	case VENUE::THEATER:
+		return "Theater";
+	}
 }
 
 ZONE toZone(int nr) {
@@ -60,13 +71,13 @@ protected:
 	const int MAXRAND = 36;
 
 public:
-	char* getRandID(){
-		char v[6];
+	void getRandID(char id[6]) {
+		//char v[6];
 		for (int i = 0; i < 6; i++) {
-			v[i] = allCharacters[rand() % MAXRAND];
+			id[i] = allCharacters[rand() % MAXRAND];
 		}
 
-		return v;
+		
 	}
 
 };

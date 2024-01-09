@@ -51,16 +51,32 @@ public:
 	}
 
 	void printZone() {
-		switch (this->zone) {
-		case(1): 
-			cout << "LEFT";
-			return;
-		case(2):
-			cout << "RIGHT";
-			return;
-		case (3): 
-			cout << "TOP";
-			return;
+
+		if (this->venue == THEATER) {
+			switch (this->zone) {
+			case(1):
+				cout << "LEFT";
+				return;
+			case(2):
+				cout << "RIGHT";
+				return;
+			case (3):
+				cout << "TOP";
+				return;
+			}
+		}
+		else if (this->venue == MOVIES) {
+			switch (this->zone) {
+			case(1):
+				cout << "LEFT";
+				return;
+			case(2):
+				cout << "MIDDLE";
+				return;
+			case (3):
+				cout << "RIGHT";
+				return;
+			}
 		}
 	}
 
@@ -257,7 +273,8 @@ public:
 
 class Ticket {
 protected:
-	char* id;
+//public:
+	char id[6] = "";
 	Event event;
 	Location location;
 
@@ -270,7 +287,7 @@ public:
 
 	void setTicketID() {
 		Randomizer rand;
-		this->id = rand.getRandID();
+		rand.getRandID(id);
 	}
 
 	void setLocation(Location l) {

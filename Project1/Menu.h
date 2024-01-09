@@ -22,15 +22,31 @@ void readFromFile(ifstream& file) {
 	if (!file.is_open()) {
 		throw exception("File does not exist.");
 	}
+	//file.seekg(ios::ios_base::beg);
+	//file.seekg(0);
 	while (!file.eof()) {
 		char buffer[255];
 		file.getline(buffer, 255);
 		cout << buffer << '\n';
 	}
+	//file.close();
 }
 
-void updateLog(fstream& file) {
-	
+void updateLog() {
+	ofstream file("Log.txt", ios::app);
+	file << CurrentTicket.getTicketID() << "\t\t";
+	//file << current.getVenue() << "\t\t";
+	//file << current.printZone() << "\t\t";
+
+	file << toString(current.getVenue()) << "\t\t";
+
+	file << toString(current.getZone()) << "\t\t";
+
+	//-------------------- -------------- -------------- -------------- -------------- -------------- -------------- -------------- -------------- -------------- -
+
+	file << current.getSeatNo() << "\t\t";
+	file << Current.getName() << '\n';
+	//file.close();
 }
 
 void readLog(fstream& file) {
@@ -42,6 +58,7 @@ void readLog(fstream& file) {
 		file.getline(buffer, 255);
 		cout << buffer << '\n';
 	}
+	//file.close();
 }
 
 void reqTicketEvent(char ans, ifstream& request) {
@@ -168,7 +185,7 @@ void reqTicketZone(VENUE venue) {
 
 void displayMenu() {
 
-
+	//cout << "Start DisplayMenu\n";
 
 	fstream log("log.txt");
 	ifstream start("MenuStart.txt");
@@ -178,6 +195,7 @@ void displayMenu() {
 
 	while (!leave) {
 
+		//cout << "StartDisplayMenuWhile\n";
 		readFromFile(start);
 		char ans = -100;
 		cin >> ans;
@@ -195,11 +213,10 @@ void displayMenu() {
 			CurrentTicket.setLocation(current);
 			CurrentTicket.setEvent(Current);
 			CurrentTicket.setTicketID();
-
 			cout << "\nTicket with ID " << CurrentTicket.getTicketID() << " has been created.\n";
-			
+			//cout << "\nTicket with ID " << CurrentTicket.id << " has been created.\n";
 
-			updateLog(log);
+			updateLog();
 			break;
 			}
 		case('0'): {
@@ -211,7 +228,9 @@ void displayMenu() {
 			}
 
 		}
-
+		//start.close();
+		//cout << "EndDisplayMenuWhile\n";
 	}
+	//cout << "EndDisplayMenu\n";
 
 }

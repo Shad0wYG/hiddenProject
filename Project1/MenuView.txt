@@ -5,7 +5,3 @@
 Purchased Tickets:
 
 id		venue		zone		seat		eventname
-
-
-
-

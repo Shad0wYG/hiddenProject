@@ -3,8 +3,9 @@
 ------------ Ticketing App ------------
 
 Options: 
-1) View Tickets (Requires App restart)
+1) View Tickets
 2) Request a Ticket
+3) Clear Tickets from Log.txt
 
 Choose a number (Press 0 to exit):
 
