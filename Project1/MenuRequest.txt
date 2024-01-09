@@ -1,2 +1,9 @@
 
 #Requesting a Ticket
+
+Choose a Venue:
+
+1) Theater
+2) Movies
+
+Your input:

@@ -6,7 +6,7 @@
 
 enum VENUE { THEATER = 1, MOVIES = 2};
 
-enum ZONE { LEFT = 1, RIGHT = 2, TOP = 3 };
+enum ZONE { LEFT = 1, RIGHT = 2, TOP = 3, MIDDLE = 4};
 
 enum EVENTTheater { HAMLET = 1, LONG_DAY = 2, AFRAID = 3, DEATH_SALESMAN = 4, OEDIPUS = 5 };
 //Hamlet - Willian Shakespeare   

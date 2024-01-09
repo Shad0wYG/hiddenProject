@@ -11,6 +11,7 @@ using namespace std;
 
 class Location {
 protected:
+	VENUE venue = THEATER;
 	int room = -1; //could be room1,room2
 	ZONE zone = LEFT;
 	int seatNo = -1; // 1-10/row if left/right, 1-20/row if top
@@ -68,33 +69,42 @@ public:
 	}
 
 	void setSeatNoAndType(int SeatNo) {
-		if (this->zone != TOP) {
-			if (SeatNo >= 1 && SeatNo <= 100) {
+		if (this->venue == THEATER) {
+
+			if (this->zone != TOP) {
+				if (SeatNo >= 1 && SeatNo <= 100) {
+					this->seatNo = SeatNo;
+					if (seatNo <= 10) isSpecialSeat = true;
+					else isSpecialSeat = false;
+				}
+			}
+
+			else {
+				if (SeatNo >= 1 && SeatNo <= 120) {
+					this->seatNo = SeatNo;
+					if (seatNo <= 20) isSpecialSeat = true;
+					else isSpecialSeat = false;
+				}
+			}
+		}
+		else if (this->venue == MOVIES) {
+			if (SeatNo >= 1 && SeatNo <= 63) {
 				this->seatNo = SeatNo;
-				if (seatNo <= 10) isSpecialSeat = true;
+				if (SeatNo >= 57) isSpecialSeat = true;
 				else isSpecialSeat = false;
 			}
 		}
-
-		else {
-			if (SeatNo >= 1 && SeatNo <= 120) {
-				this->seatNo = SeatNo;
-				if (seatNo <= 20) isSpecialSeat = true;
-				else isSpecialSeat = false;
-			}
-		}
-
 	}
 
-	///Ctors
-	Location(int Room, ZONE Zone, int SeatNo) {
-		//cout << "\n CtorLoc";
+	/////Ctors
+	//Location(int Room, ZONE Zone, int SeatNo) {
+	//	//cout << "\n CtorLoc";
 
-		this->setRoom(Room);
-		this->setZone(Zone);
-		this->setSeatNoAndType(SeatNo);
+	//	this->setRoom(Room);
+	//	this->setZone(Zone);
+	//	this->setSeatNoAndType(SeatNo);
 
-	}
+	//}
 
 
 	///Dtor
@@ -150,19 +160,19 @@ public:
 	//Setters
 
 
-	void seteventNo(int no) {
+	void seteventNo(char no) {
 		if (this->venue == THEATER) {
-			if (no < 1 || no > 5) throw exception("Invalid event");
+			if (no < '1' || no > '5') throw exception("Invalid event");
 			else this->eventNo = no;
 		}
 
 		else if (this->venue == MOVIES) {
-			if (no < 1 || no > 4) throw exception("Invalid event");
+			if (no < '1' || no > '4') throw exception("Invalid event");
 			else this->eventNo = no;
 		}
 	}
 
-	void setName() { // tf do i put in ()
+	void setName(int eventNo) { // tf do i put in ()
 		if (this->venue == THEATER) {
 			switch (this->eventNo) {
 			case(1): {
@@ -243,6 +253,9 @@ public:
 		this->id = rand.getRandID();
 	}
 
+	Ticket() {
+
+	}
 
 
 	friend void operator<<(ostream& console, Ticket& ticket);
@@ -303,7 +316,7 @@ void operator>>(ifstream& console, Event& event) {
 	console >> no2;
 	event.seteventNo(no2);
 
-	event.setName();
+	event.setName(no2);
 
 }
 

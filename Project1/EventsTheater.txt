@@ -1,5 +1,10 @@
-1: Hamlet - Willian Shakespeare
-2: Long Day's Journey Into Night - Eugene O'Neill
-3: Who's Afraid of Virginia Woolf? - Edward Albee
-4: Death of a Salesman - Arthur Miller
-5: Oedipus Rex by Sophocles
+
+Choose a Play:
+
+1) Hamlet - Willian Shakespeare
+2) Long Day's Journey Into Night - Eugene O'Neill
+3) Who's Afraid of Virginia Woolf? - Edward Albee
+4) Death of a Salesman - Arthur Miller
+5) Oedipus Rex by Sophocles
+
+Your input:

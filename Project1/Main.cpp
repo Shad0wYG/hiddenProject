@@ -14,10 +14,6 @@ using namespace std;
 
 int main() {
 	displayMenu();
-	
-	//ifstream eventstheater("EventsTheater.txt");
-	//readFromFile(eventstheater);
-
 
 
 }
