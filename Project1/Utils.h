@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <string>
 #include <fstream>
+#include "Classes.h"
 
 enum VENUE { THEATER = 1, MOVIES = 2};
 

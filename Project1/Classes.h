@@ -22,6 +22,10 @@ protected:
 public:
 
 	///Getters
+	VENUE getVenue() {
+		return this->venue;
+	}
+
 	int getRoom() {
 		return this->room;
 	}
@@ -39,6 +43,13 @@ public:
 	}
 
 
+	void printLocation() {
+		cout << "\nVenue: " << getVenue();
+		cout << "\nZone: " << getZone();
+		cout << "\nSeatno: " << getSeatNo();
+		cout << "\nSeat Type: " << getSeatType();
+	}
+
 	void printZone() {
 		switch (this->zone) {
 		case(1): 
@@ -55,6 +66,10 @@ public:
 
 
 	///Setters
+	void setVenue(VENUE venue) {
+		this->venue = venue;
+	}
+
 	void setRoom(int roomNo) {
 		if (roomNo == 1 || roomNo == 2) {
 			this->room = roomNo;
@@ -156,18 +171,23 @@ public:
 		return this->venue;
 	}
 
+	void printEvent() {
+		cout << "\nEventNo: " << getEventNo();
+		cout << "\n Event name: " << getName();
+		cout << "\n Venue: " << getVenue();
+	}
 
 	//Setters
 
 
-	void seteventNo(char no) {
+	void seteventNo(int no) {
 		if (this->venue == THEATER) {
-			if (no < '1' || no > '5') throw exception("Invalid event");
+			if (no < 1 || no > 5) throw exception("Invalid event");
 			else this->eventNo = no;
 		}
 
 		else if (this->venue == MOVIES) {
-			if (no < '1' || no > '4') throw exception("Invalid event");
+			if (no < 1 || no > 4) throw exception("Invalid event");
 			else this->eventNo = no;
 		}
 	}
@@ -253,10 +273,13 @@ public:
 		this->id = rand.getRandID();
 	}
 
-	Ticket() {
-
+	void setLocation(Location l) {
+		location = l;
 	}
 
+	void setEvent(Event e) {
+		event = e;
+	}
 
 	friend void operator<<(ostream& console, Ticket& ticket);
 	friend void operator>>(istream& console, Ticket& ticket);

@@ -1,7 +1,11 @@
 
+
 #Viewing Tickets
 
 Purchased Tickets:
+
+id		venue		zone		seat		eventname
+
 
 
 
